@@ -23,6 +23,10 @@ void Ant::move_to(int new_position_id) {
 }
 
 int Ant::choose_new_position(std::vector<int> path_list) {
+    /*
+     * Ants chose new position based on sorted vector of highest pheromone.
+     * Based on random value, and conformity factor, ant chooses to get the best path, 2nd best path, or 3rd best path
+     */
     for (auto position: visited_vertices) {
         auto found_element = std::find(path_list.begin(), path_list.end(), position);
         if (found_element != path_list.end()) {
@@ -52,6 +56,9 @@ int Ant::choose_new_position(std::vector<int> path_list) {
 
 
 float Ant::leave_pheromone(float distance) {
+    /*
+     * Amount of pheromone left is decided by path distance, and chosen mode.
+     */
     float added_pheromone = 0.0f;
 
     switch (mode) {

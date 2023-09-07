@@ -31,6 +31,10 @@ void Map::add_pheromone(int position_1, int position_2, float value) {
 }
 
 void Map::reduce_pheromone_on_all_paths() {
+    /*
+     * Reducing pheromone is crucial to erase worse paths.
+     * Pheromones are reduced differently based on chosen mode.
+     */
     for (int i = 0; i < this->number_of_vertices; i++) {
         for (int ii = 0; ii < this->number_of_vertices; ii++) {
             switch (this->mode) {
@@ -51,6 +55,9 @@ void Map::reduce_pheromone_on_all_paths() {
 }
 
 void Map::calculate_best_path() {
+    /*
+     * Best path is the path with the highest sum of pheromone
+     */
     std::vector<int> current_path;
     current_path.push_back(0);
     float current_path_sum = 0;

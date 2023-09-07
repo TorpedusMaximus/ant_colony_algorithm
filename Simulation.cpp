@@ -39,12 +39,12 @@ Simulation::~Simulation() {
 void Simulation::run(int number_of_epochs) {
     for (int a: tq::trange(number_of_epochs)) {
         for (int ii = 1; ii < map.number_of_vertices; ii++) {
-            for (auto ant: ants) {
+            for (auto ant: ants) {//Move each ant to the best possible destination from current location
                 int current_position = ant->position_id;
                 auto positions = map.get_highest_pheromone_list_from_vertex(current_position);
-                int new_position = ant->choose_new_position(positions);
+                int new_position = ant->choose_new_position(positions);//Ants decide next location based on pheromones and luck
                 float distance = map.get_distance_on_path(current_position, new_position);
-                map.add_pheromone(current_position, new_position, ant->leave_pheromone(distance));
+                map.add_pheromone(current_position, new_position, ant->leave_pheromone(distance));//Ants leave different amounts of pheromone based on mode
             }
         }
 
